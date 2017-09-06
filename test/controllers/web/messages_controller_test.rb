@@ -2,7 +2,9 @@ require 'test_helper'
 
 class Web::MessagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @message = messages(:one)
+    @message = create :message
+    @attrs = attributes_for :message
+    @attr = {title: @attrs[:title]}
   end
 
   test "should get index" do
@@ -16,12 +18,12 @@ class Web::MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create message" do
-    # TODO fix tests
     assert_difference('Message.count') do
-      post messages_url, params: { message: { title: @message.title, text: @message.text } }
+      post messages_url, params: { message: @attrs }
     end
 
     assert_redirected_to message_url(Message.last)
+    assert { Message.find_by(@attr) }
   end
 
   test "should show message" do
@@ -35,8 +37,11 @@ class Web::MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update message" do
-    patch message_url(@message), params: { message: { title: @message.title, text: @message.text } }
+    patch message_url(@message), params: { message: @attrs }
     assert_redirected_to message_url(@message)
+
+    @message.reload
+    assert { @message.text == @attrs[:text] }
   end
 
   test "should destroy message" do
@@ -45,5 +50,6 @@ class Web::MessagesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to messages_url
+    assert { Message.find_by(@attr).nil? }
   end
 end

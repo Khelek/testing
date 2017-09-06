@@ -2,6 +2,6 @@
 class AccountForm < ApplicationForm
   properties :balance, :currency, :name
 
-  # TODO валидации?
+  # TODO какие валидации?
   validates :name, presence: true
 end

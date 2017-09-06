@@ -22,7 +22,7 @@ class Web::MessagesController < Web::ApplicationController
 
     if @message.validate(params[:message])
       @message.save
-      # TODO move error messages to locales
+      # TODO move messages to locales?
       redirect_to @message, notice: 'Message was successfully created.'
     else
       render :new

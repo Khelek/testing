@@ -2,7 +2,9 @@ require 'test_helper'
 
 class Web::AccountsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @account = accounts(:one)
+    @account = create :account
+    @attrs = attributes_for :account
+    @attr = {name: @attrs[:name]}
   end
 
   test "should get index" do
@@ -17,10 +19,11 @@ class Web::AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create account" do
     assert_difference('Account.count') do
-      post accounts_url, params: { account: { balance: @account.balance, currency: @account.currency, name: @account.name } }
+      post accounts_url, params: { account: @attrs }
     end
 
     assert_redirected_to account_url(Account.last)
+    assert { Account.find_by(@attr) }
   end
 
   test "should show account" do
@@ -34,8 +37,11 @@ class Web::AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update account" do
-    patch account_url(@account), params: { account: { balance: @account.balance, currency: @account.currency, name: @account.name } }
+    patch account_url(@account), params: { account: @attrs }
     assert_redirected_to account_url(@account)
+
+    @account.reload
+    assert { @account.name == @attrs[:name] }
   end
 
   test "should destroy account" do
@@ -44,5 +50,6 @@ class Web::AccountsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to accounts_url
+    assert { Account.find_by(@attr).nil? }
   end
 end
