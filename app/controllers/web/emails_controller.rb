@@ -18,8 +18,7 @@ class Web::EmailsController < Web::ApplicationController
 
       AccountMailer.notify(message, account).deliver_now
 
-      # TODO move messages to locales?
-      redirect_to new_email_path, notice: 'Email was successfully sended.'
+      redirect_to new_email_path, notice: t('.success')
     else
       @messages = Message.all
       @accounts = Account.all

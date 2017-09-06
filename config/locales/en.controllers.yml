@@ -1,0 +1,19 @@
+en:
+  web:
+    emails:
+      create:
+        success: 'Email was successfully sended.'
+    messages:
+      create:
+        success: 'Message was successfully created.'
+      update:
+        success: 'Message was successfully updated.'
+      destroy:
+        success: 'Message was successfully destroyed.'
+    accounts:
+      create:
+        success: 'Account was successfully created.'
+      update:
+        success: 'Account was successfully updated.'
+      destroy:
+        success: 'Account was successfully destroyed.'

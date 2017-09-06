@@ -22,8 +22,7 @@ class Web::MessagesController < Web::ApplicationController
 
     if @message.validate(params[:message])
       @message.save
-      # TODO move messages to locales?
-      redirect_to @message, notice: 'Message was successfully created.'
+      redirect_to @message, notice: t('.success')
     else
       render :new
     end
@@ -32,7 +31,7 @@ class Web::MessagesController < Web::ApplicationController
   def update
     if @message.validate(params[:message])
       @message.save
-      redirect_to @message, notice: 'Message was successfully updated.'
+      redirect_to @message, notice: t('.success')
     else
       render :edit
     end
@@ -40,7 +39,7 @@ class Web::MessagesController < Web::ApplicationController
 
   def destroy
     @message.model.destroy
-    redirect_to messages_url, notice: 'Message was successfully destroyed.'
+    redirect_to messages_url, notice: t('.success')
   end
 
   private

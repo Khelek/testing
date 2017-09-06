@@ -22,7 +22,7 @@ class Web::AccountsController < Web::ApplicationController
 
     if @account.validate(params[:account])
       @account.save
-      redirect_to @account, notice: 'Account was successfully created.'
+      redirect_to @account, notice: t('.success')
     else
       render :new
     end
@@ -31,7 +31,7 @@ class Web::AccountsController < Web::ApplicationController
   def update
     if @account.validate(params[:account])
       @account.save
-      redirect_to @account, notice: 'Account was successfully updated.'
+      redirect_to @account, notice: t('.success')
     else
       render :edit
     end
@@ -39,7 +39,7 @@ class Web::AccountsController < Web::ApplicationController
 
   def destroy
     @account.model.destroy
-    redirect_to accounts_url, notice: 'Account was successfully destroyed.'
+    redirect_to accounts_url, notice: t('.success')
   end
 
   private
