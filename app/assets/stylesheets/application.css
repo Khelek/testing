@@ -14,6 +14,18 @@
  *= require_self
  */
 
+
+/* from https://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/ */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 100px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
