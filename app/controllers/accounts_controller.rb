@@ -1,7 +1,9 @@
+# coding: utf-8
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   def index
+    # TODO пагинация?
     @accounts = Account.all
   end
 
@@ -9,16 +11,17 @@ class AccountsController < ApplicationController
   end
 
   def new
-    @account = Account.new
+    @account = AccountForm.new(Account.new)
   end
 
   def edit
   end
 
   def create
-    @account = Account.new(account_params)
+    @account = AccountForm.new(Account.new)
 
-    if @account.save
+    if @account.validate(params[:account])
+      @account.save
       redirect_to @account, notice: 'Account was successfully created.'
     else
       render :new
@@ -26,7 +29,8 @@ class AccountsController < ApplicationController
   end
 
   def update
-    if @account.update(account_params)
+    if @account.validate(params[:account])
+      @account.save
       redirect_to @account, notice: 'Account was successfully updated.'
     else
       render :edit
@@ -34,17 +38,12 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    @account.destroy
+    @account.model.destroy
     redirect_to accounts_url, notice: 'Account was successfully destroyed.'
   end
 
   private
-    def set_account
-      @account = Account.find(params[:id])
-    end
-
-    # TODO change to form
-    def account_params
-      params.require(:account).permit(:balance, :currency, :name)
-    end
+  def set_account
+    @account = AccountForm.new(Account.find(params[:id]))
+  end
 end
