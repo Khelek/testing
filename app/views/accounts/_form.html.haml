@@ -1,9 +1,9 @@
 = simple_form_for @account, default_form_options do |f|
   = f.error_notification
 
-  = f.input :balance, required: true
-  = f.input :currency, required: true
-  = f.input :name, required: true
+  = f.input :name
+  = f.input :balance
+  = f.input :currency
 
   = f.button :submit
   = link_to t('form.cancel'), accounts_path, class: 'btn btn-default'
