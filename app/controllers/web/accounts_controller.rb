@@ -1,5 +1,5 @@
 # coding: utf-8
-class AccountsController < ApplicationController
+class Web::AccountsController < Web::ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   def index

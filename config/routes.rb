@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :accounts
 
-  root "accounts#index"
+  scope module: 'web' do
+    root "accounts#index"
+    resources :accounts
+  end
+
 end
