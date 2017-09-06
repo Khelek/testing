@@ -16,6 +16,8 @@ class Web::EmailsController < Web::ApplicationController
       account  = Account.find(@email.account)
       message = Message.find(@email.message)
 
+      AccountMailer.notify(message, account).deliver_now
+
       # TODO move error messages to locales
       redirect_to new_email_path, notice: 'Email was successfully sended.'
     else
