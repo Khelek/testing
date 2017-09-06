@@ -1,0 +1,11 @@
+.page-header
+  %h1= t('titles.new', model: 'Email')
+
+= simple_form_for @email, default_form_options(url: emails_path, as: :email) do |f|
+  = f.error_notification
+
+  = f.input :account, collection: @accounts, include_blank: false
+  = f.input :message, collection: @messages, include_blank: false
+
+  = f.button :submit
+  = link_to t('form.cancel'), accounts_path, class: 'btn btn-default'

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
     resources :accounts
     resources :messages
+    resources :emails
   end
 
 end
