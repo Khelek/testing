@@ -1,0 +1,17 @@
+- model_class = Message
+.page-header
+  %h1= t('.title', default: model_class.model_name.human.titleize)
+
+%p
+  %strong= model_class.human_attribute_name(:title) + ':'
+  %br
+  = @message.title
+%p
+  %strong= model_class.human_attribute_name(:text) + ':'
+  %br
+  = @message.text
+
+
+= link_to t('form.back'), messages_path, class: 'btn btn-default'
+= link_to t('form.edit'), edit_message_path(@message), class: 'btn btn-default'
+= link_to t('form.destroy'), message_path(@message), method: "delete", data: { confirm: t('form.confirm') }, class: 'btn btn-danger'
